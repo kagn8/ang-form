@@ -1,0 +1,51 @@
+pre.result {
+    padding: 15px;
+    background-color: #EEE;
+  }
+  
+  h2 {
+    a {
+      display: inline-block;
+      text-align: center;
+      padding: 0px;
+      min-width: 25px;
+      background-color: #00aada;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+  
+  .machine-row {
+    formpart {
+      display: inline-block;
+    }
+  
+    a {
+      cursor: pointer;
+      color: red;
+    }
+  }
+  
+  .invalid {
+    border: 1px solid red;
+  }
+  .create{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    background-color: red;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    color: white;
+  }
+  .plus{
+    background-color: red;
+    color: red;
+  }
+  p{
+    color: red;
+  }

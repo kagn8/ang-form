@@ -1,0 +1,10 @@
+<div class="container1">
+
+    <p *ngIf="home.length == 0" class="m-5">Order list is empty, please create a new order <a [routerLink]="['/create']" class="btn btn-success">+</a></p>
+    <div *ngIf="home.length > 0" class="m-2">
+        <h1>List of order</h1>
+        <div *ngFor="let element of home">
+            <p>{{element.companyName}}, {{element.email}}, {{element.phoneNumber}}, {{element.machineType}}, {{element.amount}}  <button (click)="delete(element)" class="ml-2 btn btn-danger">Delete</button></p>
+        </div>
+    </div>
+</div>

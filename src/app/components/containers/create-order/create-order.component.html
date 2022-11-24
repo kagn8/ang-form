@@ -1,42 +1,39 @@
-
-<form [formGroup]="orderForm" (ngSubmit)="submit()" class="create">
+<div class="all">
+  <h2>Customer info</h2>
+<form [formGroup]="orderForm" (ngSubmit)="areYouSure()" class="create bg bg-gradient">
   
-    <h2>Customer info</h2>
-  
-    <app-formpart label="Company name">
-      <p *ngIf="!orderForm.get('companyName')!.valid && orderForm.get('companyName')!.touched ">Please insert a valid Company name</p>
+      
+      <label for="companyName">Company Name:</label>
+      <p *ngIf="!companyNameIsValid">Please insert a valid Company name</p>
       <input class="form-control" type="text" formControlName="companyName" />
-    </app-formpart>
-    <app-formpart label="Email">
-      <p *ngIf="!orderForm.get('email')!.valid && orderForm.get('email')!.touched ">please insert a valid Mail</p>
+    
+      <label for="email">Email:</label>
+      <p *ngIf="!emailIsValid">please insert a valid Mail</p>
       <input class="form-control" type="email" formControlName="email" />
-    </app-formpart>
-    <app-formpart label="Phone number">
-      <p *ngIf="!orderForm.get('phoneNumber')!.valid && orderForm.get('phoneNumber')!.touched ">please insert a valid Phone</p>
+  
+      <label for="phoneNumber">Phone Number:</label>
+      <p *ngIf="!phoneNumberIsValid">please insert a valid Phone</p>
       <input class="form-control" type="number" formControlName="phoneNumber" minlength="10"/>
-    </app-formpart>
+
+      <label for="amount">amount:</label>
+      <p *ngIf="!amountIsValid ">please insert a valid amount</p>
+      <input class="form-control" type="number" formControlName="amount" />
   
-    <!-- <h2 >Machines <a (click)="addMachine()" >+</a></h2> -->
-  
-    <div class="machine-row">
-      <app-formpart label="Machine type">
-        <p *ngIf="!orderForm.get('machineType')!.valid && orderForm.get('machineType')!.touched ">Please Select a machin type</p>
+        <p *ngIf="!machineTypeIsValid">Please Select a machin type</p>
+        <label for="machineType">MachineType:</label>
         <select formControlName="machineType">
           <option>Scissor lift</option>
           <option>Telehandler</option>
           <option>Transporter</option>
         </select>
-      </app-formpart>
-      <app-formpart label="Amount">
-        <p *ngIf="!orderForm.get('amount')!.valid && orderForm.get('amount')!.touched ">please insert a valid amount</p>
-        <input class="form-control" type="number" formControlName="amount" />
-      </app-formpart>
-      <input class="btn btn-primary mr-2" type="submit" value="Place order" [disabled]="!orderForm.valid"/>
-      <a class="btn btn-danger text-white" (click)="deleteMachine()">Delete</a>
-    </div>
+     
+      <div class="button mt-3">
+
+        <input class="btn btn-primary mr-2" type="submit" value="Place order" />
+        <a class="btn btn-danger text-white" (click)="deleteMachine()">Delete</a>
+   
+      </div>
  
   </form>
-  
-  <pre class="result" *ngIf="result">
-  {{result | json}}
-  </pre>
+
+</div>

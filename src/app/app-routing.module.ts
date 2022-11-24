@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateOrderComponent } from './components/containers/create-order/create-order.component';
 import { ViewOrderComponent } from './components/containers/view-order/view-order.component';
 import { HomeComponent } from './components/home/home.component';
+import { SingleOrderComponent } from './single-order/single-order.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'view',
     component: ViewOrderComponent
+  },
+  {
+    path: 'single',
+    component: SingleOrderComponent
   }
 ];
 

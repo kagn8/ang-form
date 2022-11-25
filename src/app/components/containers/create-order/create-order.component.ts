@@ -45,7 +45,8 @@ export class CreateOrderComponent implements OnInit {
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         ),
       ]),
-      phoneNumber: new FormControl(null, Validators.required),
+      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+{10}')
+    ]),
       machineType: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });

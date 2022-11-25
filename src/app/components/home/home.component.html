@@ -1,6 +1,17 @@
-<div class="container">
-  <div class="row mt-5">
-    <div class="btn btn-primary col-12 p-3">Create a order</div>
-    <div class="btn btn-primary col-12 mt-5 p-3">View Order</div>
-  </div>
+<div id="create-user" *ngIf="!signUp" class="container">
+  <h1>Log in to continue
+  </h1>
+  <form form [formGroup]="UserForm" (ngSubmit)="signIn()" >
+    <label for="username">Username:</label>
+    <input class="form-control" type="text" formControlName="username" />
+    <label for="email">Email:</label>
+    <input class="form-control" type="email" formControlName="email" [ngClass]="{ 'border border-danger': !UserForm.controls['email'].valid && UserForm.touched}"/>
+    <input class="btn btn-primary mr-2 mt-3" type="submit" value="Submit" [disabled]="!UserForm.valid" />
+  </form>
+</div>
+
+<div class="home" *ngIf="signUp">
+  <h2 class="m-5">Welcome, {{user!.username}}</h2>
+  <h3>You can create a order <a [routerLink]="['create']">here!</a> </h3>
+
 </div>

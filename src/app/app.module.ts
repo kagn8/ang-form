@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ViewOrderComponent } from './components/containers/view-order/view-order.component';
 import { SingleOrderComponent } from './single-order/single-order.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     ViewOrderComponent,
     SingleOrderComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

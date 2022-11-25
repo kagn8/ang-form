@@ -1,19 +1,6 @@
-nav{
-    background: rgb(21,29,37);
-background: -moz-linear-gradient(0deg, rgba(21,29,37,1) 0%, rgba(11,35,80,1) 100%);
-background: -webkit-linear-gradient(0deg, rgba(21,29,37,1) 0%, rgba(11,35,80,1) 100%);
-background: linear-gradient(0deg, rgba(21,29,37,1) 0%, rgba(11,35,80,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#151d25",endColorstr="#0b2350",GradientType=1);
 
-li{
-    a{
-        color: white;
-        &:hover{
-            color: red;
-        }
-    }
-}
-}
-body{
- background-color: red;
+#home{
+ background-color: black;
+ color: white;
+ height: 100%;
 }

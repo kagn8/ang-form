@@ -37,8 +37,8 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user')!);
     this.orderForm = new FormGroup({
-      companyName: new FormControl({value: this.user.username, disabled:true},  Validators.required),
-      email: new FormControl({value: this.user.email, disabled:true}, [
+      companyName: new FormControl( this.user.username,  Validators.required),
+      email: new FormControl(this.user.email, [
         Validators.required,
         Validators.email,
         Validators.pattern(
@@ -56,7 +56,7 @@ export class CreateOrderComponent implements OnInit {
 
   areYouSure() {
     console.log(this.orders.length);
-    
+
     if (!this.orderForm.get('email')!.valid) {
       this.emailIsValid = false;
     } else this.emailIsValid = true;
@@ -87,9 +87,9 @@ export class CreateOrderComponent implements OnInit {
       if (this.orders.length > 0) {
         for (const order of this.orders) {
           console.log(order.email, this.user.email);
-          
+
           if (order.email == this.user.email) {
-            
+
             if (order.expirationDate <= Date.now()) {
               Swal.fire({
                 title: 'Do you want to save the changes?',

@@ -7,6 +7,7 @@ export class Order implements IOrder {
   machineType: string;
   phoneNumber: number;
   creationDate: string;
+  country: string;
   expirationDate: number;
 
   constructor(
@@ -14,12 +15,14 @@ export class Order implements IOrder {
     companyName: string,
     email: string,
     machineType: string,
+    country: string,
     phoneNumber: number
   ) {
     this.amount = amount;
     this.companyName = companyName;
     this.email = email;
     this.machineType = machineType;
+    this.country = country;
     this.phoneNumber = phoneNumber;
     this.creationDate = `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`;
     this.expirationDate = Date.now() + 300000;

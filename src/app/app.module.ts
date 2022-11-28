@@ -12,6 +12,8 @@ import { ViewOrderComponent } from './components/containers/view-order/view-orde
 import { SingleOrderComponent } from './single-order/single-order.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorInterceptor } from './interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NavbarComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     CommonModule,
@@ -31,7 +34,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserAnimationsModule
   ],
   exports: [ CreateOrderComponent ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS, 
+    useClass:InterceptorInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

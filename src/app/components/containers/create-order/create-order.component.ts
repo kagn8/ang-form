@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { IOrder } from 'src/app/iorder';
 import { IUser } from 'src/app/Iuser';
 import { Order } from 'src/app/order';
+import { MainServiceService } from 'src/app/services/main-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,12 +30,16 @@ export class CreateOrderComponent implements OnInit {
   amountIsValid = true;
   machineTypeIsValid = true;
 
+  countries: any
+
   isValid = false;
   user!: IUser;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private serv: MainServiceService) {}
 
   ngOnInit(): void {
+    
+    
     this.user = JSON.parse(localStorage.getItem('user')!);
     this.orderForm = new FormGroup({
       companyName: new FormControl( this.user.username,  Validators.required),
@@ -45,14 +50,19 @@ export class CreateOrderComponent implements OnInit {
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         ),
       ]),
-      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+{10}')
-    ]),
+      phoneNumber: new FormControl(null, [Validators.required]),
       machineType: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
     if (localStorage.getItem('order') != null) {
       this.orders = JSON.parse(localStorage.getItem('order')!);
     } else this.orders = [];
+
+    this.serv.getCountries().subscribe((res:any) =>{this.countries = res;
+    
+    } )
+    console.log(this.countries);
   }
 
   areYouSure() {
@@ -171,11 +181,15 @@ export class CreateOrderComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.orderForm);
+    
+
     this.singleOrder = new Order(
       this.orderForm.value.amount,
       this.orderForm.value.companyName,
       this.orderForm.value.email,
       this.orderForm.value.machineType,
+      this.orderForm.value.country.name,
       this.orderForm.value.phoneNumber
     );
 
@@ -195,6 +209,7 @@ export class CreateOrderComponent implements OnInit {
       ]),
       phoneNumber: new FormControl(null, Validators.required),
       machineType: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
   }
@@ -211,6 +226,7 @@ export class CreateOrderComponent implements OnInit {
       ]),
       phoneNumber: new FormControl(null, Validators.required),
       machineType: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
   }

@@ -4,6 +4,7 @@ export interface IOrder {
     email: string;
     machineType: string;
     phoneNumber: number;
+    country: string;
     creationDate:string;
     expirationDate: number;
 }

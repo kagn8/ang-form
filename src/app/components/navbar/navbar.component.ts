@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
   isUserLogged: boolean = false;
   user!: IUser | null;
+  
 
   constructor(private serv: MainServiceService, private route: Router) {}
 
@@ -25,6 +26,8 @@ export class NavbarComponent implements OnInit {
     this.serv.obs.subscribe((res) => {
       this.isUserLogged = res;
     });
+
+    
   }
 
   logOut() {

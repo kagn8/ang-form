@@ -15,6 +15,8 @@ export class SingleOrderComponent implements OnInit {
   ngOnInit(): void {
     this.order = JSON.parse(localStorage.getItem('singleOrder')!);
     console.log(this.order);
+
+    console.log(this.order.country)
     
     
   }

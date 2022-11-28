@@ -15,6 +15,14 @@
       <p *ngIf="!phoneNumberIsValid">please insert a valid Phone</p>
       <input class="form-control" type="number" formControlName="phoneNumber" minlength="10"/>
 
+      
+        <label for="exampleFormControlSelect2">Example multiple select</label>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="country"  >
+          <option *ngFor="let country of countries" [value]="country">{{country.name.common}}</option>
+          
+        </select>
+      
+
       <label for="amount">amount:</label>
       <p *ngIf="!amountIsValid ">please insert a valid amount</p>
       <input class="form-control" type="number" formControlName="amount" />

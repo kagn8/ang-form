@@ -1,32 +1,32 @@
 <div class="all">
   <h2>Customer info</h2>
 <form [formGroup]="orderForm" (ngSubmit)="areYouSure()" class="create bg bg-gradient">
-  
-      
+
+
       <label for="companyName">Company Name:</label>
       <p *ngIf="!companyNameIsValid">Please insert a valid Company name</p>
       <input class="form-control" type="text" formControlName="companyName" />
-    
+
       <label for="email">Email:</label>
       <p *ngIf="!emailIsValid">please insert a valid Mail</p>
       <input class="form-control" type="email" formControlName="email" />
-  
+
       <label for="phoneNumber">Phone Number:</label>
       <p *ngIf="!phoneNumberIsValid">please insert a valid Phone</p>
       <input class="form-control" type="number" formControlName="phoneNumber" minlength="10"/>
 
-      
-        <label for="exampleFormControlSelect2">Example multiple select</label>
-        <select class="form-control" id="exampleFormControlSelect1" formControlName="country"  >
-          <option *ngFor="let country of countries" [value]="country">{{country.name.common}}</option>
-          
+
+        <label for="exampleFormControlSelect2">Country:</label>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="country" >
+          <option *ngFor="let country of countries" [value]="country.name.common" >{{country.name.common}}</option>
+
         </select>
-      
+
 
       <label for="amount">amount:</label>
       <p *ngIf="!amountIsValid ">please insert a valid amount</p>
       <input class="form-control" type="number" formControlName="amount" />
-  
+
         <p *ngIf="!machineTypeIsValid">Please Select a machin type</p>
         <label for="machineType">MachineType:</label>
         <select formControlName="machineType">
@@ -34,14 +34,14 @@
           <option>Telehandler</option>
           <option>Transporter</option>
         </select>
-     
+
       <div class="button mt-3">
 
         <input class="btn btn-primary mr-2" type="submit" value="Place order" />
         <a class="btn btn-danger text-white" (click)="deleteMachine()">Delete</a>
-   
+
       </div>
- 
+
   </form>
 
 </div>

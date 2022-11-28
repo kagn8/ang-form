@@ -8,22 +8,24 @@ import { IUser } from '../Iuser';
   providedIn: 'root'
 })
 export class MainServiceService {
-  
+
   constructor(private http:HttpClient) { }
 
-  home!:IOrder[]
+  home:IOrder[] = []
   user!:IUser|null
 
+  allOrdersSub = new BehaviorSubject<IOrder[]>(this.home)
+  orderObs = this.allOrdersSub.asObservable()
+
   subject = new BehaviorSubject<boolean>(false)
-  
   obs = this.subject.asObservable()
 
-  
+
   getCountries(){
 
     return this.http.get('https://restcountries.com/v3.1/all')
   }
 
 
-  
+
 }

@@ -1,4 +1,5 @@
 export interface IOrder {
+    id:number;
     amount: number;
     companyName: string;
     email: string;

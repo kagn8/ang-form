@@ -24,25 +24,32 @@ export class CreateOrderComponent implements OnInit {
   singleOrder!: IOrder;
   orders!: IOrder[];
 
+  allOrdersSub!:IOrder[];
+
   emailIsValid = true;
   companyNameIsValid = true;
   phoneNumberIsValid = true;
   amountIsValid = true;
   machineTypeIsValid = true;
 
-  countries: any
+  countries: any;
 
   isValid = false;
   user!: IUser;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private serv: MainServiceService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private serv: MainServiceService
+  ) {}
 
   ngOnInit(): void {
-    
-    
+
+    this.serv.orderObs.subscribe(res => this.allOrdersSub = res)
+
     this.user = JSON.parse(localStorage.getItem('user')!);
     this.orderForm = new FormGroup({
-      companyName: new FormControl( this.user.username,  Validators.required),
+      companyName: new FormControl(this.user.username, Validators.required),
       email: new FormControl(this.user.email, [
         Validators.required,
         Validators.email,
@@ -59,9 +66,9 @@ export class CreateOrderComponent implements OnInit {
       this.orders = JSON.parse(localStorage.getItem('order')!);
     } else this.orders = [];
 
-    this.serv.getCountries().subscribe((res:any) =>{this.countries = res;
-    
-    } )
+    this.serv.getCountries().subscribe((res: any) => {
+      this.countries = res;
+    });
     console.log(this.countries);
   }
 
@@ -100,7 +107,6 @@ export class CreateOrderComponent implements OnInit {
           console.log(order.email, this.user.email);
 
           if (order.email == this.user.email) {
-
             if (order.expirationDate <= Date.now()) {
               Swal.fire({
                 title: 'Do you want to save the changes?',
@@ -130,7 +136,7 @@ export class CreateOrderComponent implements OnInit {
                 text: 'This user has already placed an order just now, wait at least 5 minutes between one order and another',
               });
             }
-          } else{
+          } else {
             Swal.fire({
               title: 'Do you want to save the changes?',
               showDenyButton: true,
@@ -181,15 +187,15 @@ export class CreateOrderComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.orderForm);
-    
+    console.log(this.orderForm.value.country);
 
     this.singleOrder = new Order(
+      this.allOrdersSub.length,
       this.orderForm.value.amount,
       this.orderForm.value.companyName,
       this.orderForm.value.email,
       this.orderForm.value.machineType,
-      this.orderForm.value.country.name,
+      this.orderForm.value.country,
       this.orderForm.value.phoneNumber
     );
 
@@ -229,5 +235,10 @@ export class CreateOrderComponent implements OnInit {
       country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
+  }
+
+  cambio(e:Event){
+    console.log(e);
+
   }
 }

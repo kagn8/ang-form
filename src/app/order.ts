@@ -1,6 +1,7 @@
 import { IOrder } from './iorder';
 
 export class Order implements IOrder {
+  id:number;
   amount: number;
   companyName: string;
   email: string;
@@ -11,6 +12,7 @@ export class Order implements IOrder {
   expirationDate: number;
 
   constructor(
+    id:number,
     amount: number,
     companyName: string,
     email: string,
@@ -18,6 +20,7 @@ export class Order implements IOrder {
     country: string,
     phoneNumber: number
   ) {
+    this.id = id;
     this.amount = amount;
     this.companyName = companyName;
     this.email = email;

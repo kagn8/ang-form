@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateOrderComponent } from './components/containers/create-order/create-order.component';
 import { ViewOrderComponent } from './components/containers/view-order/view-order.component';
 import { HomeComponent } from './components/home/home.component';
+import { DeactivateGuardGuard } from './deactivate-guard.guard';
+import { GuardGuard } from './guard.guard';
 import { SingleOrderComponent } from './single-order/single-order.component';
 
 const routes: Routes = [
@@ -12,15 +14,19 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: CreateOrderComponent
+    component: CreateOrderComponent,
+    canActivate: [GuardGuard],
+    canDeactivate: [DeactivateGuardGuard],
   },
   {
     path: 'view',
-    component: ViewOrderComponent
+    component: ViewOrderComponent,
+    canActivate: [GuardGuard]
   },
   {
     path: 'single',
-    component: SingleOrderComponent
+    component: SingleOrderComponent,
+    canActivate: [GuardGuard]
   }
 ];
 

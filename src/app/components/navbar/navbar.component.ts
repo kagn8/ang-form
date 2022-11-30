@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   constructor(private serv: MainServiceService, private route: Router) {}
 
   ngOnInit(): void {
-    this.route.navigate(['/']);
     if (localStorage.getItem('user')) {
       this.serv.subject.next(true);
       this.isUserLogged = true;

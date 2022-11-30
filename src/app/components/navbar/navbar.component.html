@@ -9,10 +9,10 @@
           <a class="nav-link" [routerLink]="['/']" routerLinkActive="text-success" [routerLinkActiveOptions]="{exact:true}">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['create']" *ngIf="isUserLogged" routerLinkActive="text-success">Create </a>
+          <a class="nav-link" [routerLink]="['create']" [ngClass]="{'disab' : !isUserLogged}" routerLinkActive="text-success">Create </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['view']" *ngIf="isUserLogged" routerLinkActive="text-success">View Order</a>
+          <a class="nav-link" [routerLink]="['view']" [ngClass]="{'disab' : !isUserLogged}" routerLinkActive="text-success">View Order</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logOut()" *ngIf="isUserLogged" routerLinkActive="text-success">Logout</a>

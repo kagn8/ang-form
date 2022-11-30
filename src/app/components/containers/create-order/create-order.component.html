@@ -1,6 +1,6 @@
 <div class="all">
   <h2>Customer info</h2>
-<form [formGroup]="orderForm" (ngSubmit)="areYouSure()" class="create bg bg-gradient">
+<form [formGroup]="orderForm" (ngSubmit)="areYouSure()" class="create bg bg-gradient" (input)="guardCheck()">
 
 
       <label for="companyName">Company Name:</label>
@@ -43,5 +43,13 @@
       </div>
 
   </form>
+
+  <div class="modal-" [ngClass]="{'open-modal' : openModal}">
+    <h2>You entered data, are you sure you want to leave the page?</h2>
+    <div>
+      <button class="btn btn-warning" (click)="yes()">Yes</button>
+      <button class="btn btn-secondary ml-2" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
 
 </div>

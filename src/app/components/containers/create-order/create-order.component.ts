@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { IOrder } from 'src/app/iorder';
 import { IUser } from 'src/app/Iuser';
 import { Order } from 'src/app/order';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { MainServiceService } from 'src/app/services/main-service.service';
 import Swal from 'sweetalert2';
 
@@ -37,16 +38,25 @@ export class CreateOrderComponent implements OnInit {
   isValid = false;
   user!: IUser;
 
+  openModal!:boolean
+
   constructor(
     private router: Router,
-    private serv: MainServiceService
+    private serv: MainServiceService,
+    private auth:AuthServiceService
   ) {}
 
   ngOnInit(): void {
 
+    this.auth.modalObs.subscribe(res => {console.log(res);
+     this.openModal = !res})
+
+    this.auth.deactivatorObs.subscribe(res => console.log(res))
+
     this.serv.getOrders().subscribe((res:any)=> this.orders = res)
 
     this.deleteMachine()
+    console.log(this.orderForm.statusChanges.subscribe(res=> console.log(res)));
 
     this.serv.getCountries().subscribe((res: any) => {
       for (const country of res) {
@@ -54,7 +64,7 @@ export class CreateOrderComponent implements OnInit {
       }
       this.countries.sort((a, b) => a.localeCompare(b))
     });
-
+    this.openModal =false
   }
 
   areYouSure() {
@@ -202,5 +212,22 @@ export class CreateOrderComponent implements OnInit {
       country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
+  }
+  nav = false
+  
+  guardCheck(){
+    if (this.orderForm.value.phoneNumber != null || this.orderForm.value.amount != null || this.orderForm.value.country != null  || this.orderForm.value.machineType != null) {
+      this.auth.deactivatorSubject.next(false)
+      this.auth.deactivatorObs.subscribe(res => console.log(res))
+    }else this.auth.deactivatorSubject.next(true), this.openModal= false
+  }
+  closeModal(){
+    console.log(this.openModal);
+    
+    this.openModal = !this.openModal
+  }
+  yes(){
+    this.auth.deactivatorSubject.next(true)
+    this.openModal = !this.openModal
   }
 }

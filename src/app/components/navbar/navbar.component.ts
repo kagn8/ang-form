@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
   isUserLogged: boolean = false;
   user!: IUser | null;
-  
+
 
   constructor(private serv: MainServiceService, private route: Router) {}
 
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
       this.isUserLogged = res;
     });
 
-    
+
   }
 
   logOut() {
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Do it!',
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('user');

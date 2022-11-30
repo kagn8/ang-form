@@ -54,6 +54,28 @@
       "creationDate": "1/10/2022 17:40",
       "expirationDate": 1669653928443,
       "id": 7
+    },
+    {
+      "amount": 49,
+      "companyName": "Totam velit proident",
+      "email": "fyno@mailinator.com",
+      "machineType": "Scissor lift",
+      "country": "Comoros",
+      "phoneNumber": 57,
+      "creationDate": "3/10/2022 10:54",
+      "expirationDate": 1669802375639,
+      "id": 8
+    },
+    {
+      "amount": 90,
+      "companyName": "Alias iste sunt ad ",
+      "email": "jobutowav@mailinator.com",
+      "machineType": "Telehandler",
+      "country": "Faroe Islands",
+      "phoneNumber": 4,
+      "creationDate": "3/10/2022 10:56",
+      "expirationDate": 1669802484023,
+      "id": 9
     }
   ]
 }

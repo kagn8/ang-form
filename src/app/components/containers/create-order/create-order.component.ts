@@ -47,14 +47,14 @@ export class CreateOrderComponent implements OnInit {
     this.serv.getOrders().subscribe((res:any)=> this.orders = res)
 
     this.deleteMachine()
-  
+
     this.serv.getCountries().subscribe((res: any) => {
       for (const country of res) {
         this.countries.push(country.name.common)
       }
       this.countries.sort((a, b) => a.localeCompare(b))
     });
-   
+
   }
 
   areYouSure() {
@@ -159,7 +159,7 @@ export class CreateOrderComponent implements OnInit {
             );
             setTimeout(() => {
               this.submit();
-              this.router.navigate(['/', 'single']);
+              this.router.navigate(['/', 'view']);
             }, 1500);
           } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info');
@@ -197,7 +197,7 @@ export class CreateOrderComponent implements OnInit {
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         ),
       ]),
-      phoneNumber: new FormControl(null,  [Validators.required, Validators.pattern("[0-9]{12}")]),
+      phoneNumber: new FormControl(null,  [Validators.required]),
       machineType: new FormControl(null, Validators.required),
       country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),

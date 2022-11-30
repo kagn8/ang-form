@@ -13,12 +13,12 @@
 
       <label for="phoneNumber">Phone Number:</label>
       <p *ngIf="!phoneNumberIsValid">please insert a valid Phone</p>
-      <input class="form-control" type="number" formControlName="phoneNumber" minlength="10"/>
+      <input class="form-control" type="number" formControlName="phoneNumber" min="1000000000" max="9999999999"/>
 
 
         <label for="exampleFormControlSelect2">Country:</label>
         <select class="form-control" id="exampleFormControlSelect1" formControlName="country" >
-          <option *ngFor="let country of countries" [value]="country.name.common" >{{country.name.common}}</option>
+          <option *ngFor="let country of countries" [value]="country" >{{country}}</option>
 
         </select>
 

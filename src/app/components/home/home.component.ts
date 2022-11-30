@@ -28,10 +28,7 @@ export class HomeComponent implements OnInit {
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       ),]),
    })
-   this.user= JSON.parse(localStorage.getItem('user')!)
-   console.log(this.UserForm);
-   
-  }
+   this.user= JSON.parse(localStorage.getItem('user')!)}
   signIn(){
     this.user = {
       username: this.UserForm.value.username,

@@ -32,49 +32,32 @@ export class CreateOrderComponent implements OnInit {
   amountIsValid = true;
   machineTypeIsValid = true;
 
-  countries: any;
+  countries: string[] = [];
 
   isValid = false;
   user!: IUser;
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     private serv: MainServiceService
   ) {}
 
   ngOnInit(): void {
 
-    this.serv.orderObs.subscribe(res => this.allOrdersSub = res)
+    this.serv.getOrders().subscribe((res:any)=> this.orders = res)
 
-    this.user = JSON.parse(localStorage.getItem('user')!);
-    this.orderForm = new FormGroup({
-      companyName: new FormControl(this.user.username, Validators.required),
-      email: new FormControl(this.user.email, [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        ),
-      ]),
-      phoneNumber: new FormControl(null, [Validators.required]),
-      machineType: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
-    });
-    if (localStorage.getItem('order') != null) {
-      this.orders = JSON.parse(localStorage.getItem('order')!);
-    } else this.orders = [];
-
+    this.deleteMachine()
+  
     this.serv.getCountries().subscribe((res: any) => {
-      this.countries = res;
+      for (const country of res) {
+        this.countries.push(country.name.common)
+      }
+      this.countries.sort((a, b) => a.localeCompare(b))
     });
-    console.log(this.countries);
+   
   }
 
   areYouSure() {
-    console.log(this.orders.length);
-
     if (!this.orderForm.get('email')!.valid) {
       this.emailIsValid = false;
     } else this.emailIsValid = true;
@@ -123,7 +106,7 @@ export class CreateOrderComponent implements OnInit {
                   );
                   setTimeout(() => {
                     this.submit();
-                    this.router.navigate(['/', 'single']);
+                    this.router.navigate(['view']);
                   }, 1500);
                 } else if (result.isDenied) {
                   Swal.fire('Changes are not saved', '', 'info');
@@ -190,7 +173,6 @@ export class CreateOrderComponent implements OnInit {
     console.log(this.orderForm.value.country);
 
     this.singleOrder = new Order(
-      this.allOrdersSub.length,
       this.orderForm.value.amount,
       this.orderForm.value.companyName,
       this.orderForm.value.email,
@@ -199,46 +181,26 @@ export class CreateOrderComponent implements OnInit {
       this.orderForm.value.phoneNumber
     );
 
-    this.orders.push(this.singleOrder);
+    this.serv.postOrder(this.singleOrder).subscribe(res=>console.log(res))
 
-    localStorage.setItem('order', JSON.stringify(this.orders));
-    localStorage.setItem('singleOrder', JSON.stringify(this.singleOrder));
-
-    this.orderForm = new FormGroup({
-      companyName: new FormControl(null, Validators.required),
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        ),
-      ]),
-      phoneNumber: new FormControl(null, Validators.required),
-      machineType: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
-    });
+   this.deleteMachine()
   }
 
   deleteMachine() {
+    this.user = JSON.parse(localStorage.getItem('user')!);
     this.orderForm = new FormGroup({
-      companyName: new FormControl(null, Validators.required),
-      email: new FormControl(null, [
+      companyName: new FormControl(this.user.username, Validators.required),
+      email: new FormControl(this.user.email, [
         Validators.required,
         Validators.email,
         Validators.pattern(
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         ),
       ]),
-      phoneNumber: new FormControl(null, Validators.required),
+      phoneNumber: new FormControl(null,  [Validators.required, Validators.pattern("[0-9]{12}")]),
       machineType: new FormControl(null, Validators.required),
       country: new FormControl(null, Validators.required),
       amount: new FormControl(null, Validators.required),
     });
-  }
-
-  cambio(e:Event){
-    console.log(e);
-
   }
 }

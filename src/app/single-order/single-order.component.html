@@ -1,5 +1,24 @@
-<h2>Order details</h2>
-<h3>Order created by: {{order.companyName}}</h3>
-<p>amount of of order: {{order.amount}}</p>
-<p>Contact Costumer: {{order.email}}, {{order.phoneNumber}}, {{order.country}}</p>
-<i>Creation of order: {{order.creationDate}}</i>
+<div class="flex p-5">
+  <h2>Edit Your order</h2>
+  <h3>Order created by: {{ order.companyName }}</h3>
+  <p>
+    Contact Costumer: {{ order.email }}, {{ order.phoneNumber }},
+    {{ order.country }}
+  </p>
+  <i>Creation of order: {{ order.creationDate }}</i>
+
+  <form [formGroup]="patchForm" (ngSubmit)="patchOrder()" class="flex">
+    <label for="amount">amount:</label>
+
+    <input class="form-control" type="number" formControlName="amount" />
+
+    <label for="machineType">MachineType:</label>
+    <select formControlName="machineType">
+      <option>Scissor lift</option>
+      <option>Telehandler</option>
+      <option>Transporter</option>
+    </select>
+
+    <input class="btn btn-warning mr-2" type="submit" value="Edit order" />
+  </form>
+</div>

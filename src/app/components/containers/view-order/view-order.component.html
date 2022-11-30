@@ -10,11 +10,11 @@
         {{ element.companyName }}, {{ element.email }},
         {{ element.phoneNumber }}, {{ element.machineType }},
         {{ element.amount }}
-        <button (click)="delete(element)" class="ml-2 btn btn-danger">
+        <button (click)="delete(element.id!)" class="ml-2 btn btn-danger">
           Delete
         </button>
         <button (click)="viewOrder(element)" class="ml-2 btn btn-warning">
-          view order
+          edit order
         </button>
       </p>
     </div>

@@ -14,6 +14,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor.interceptor';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { InterceptorInterceptor } from './interceptor.interceptor';
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GridModule,
+    ButtonsModule
   ],
   exports: [ CreateOrderComponent ],
   providers: [{

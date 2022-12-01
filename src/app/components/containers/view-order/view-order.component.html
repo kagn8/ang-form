@@ -1,3 +1,14 @@
+<div class="container">
+  <h1>Grid</h1>
+  <kendo-grid [data]="home">
+    <kendo-grid-column field="companyName" title="companyName"> </kendo-grid-column>
+    <kendo-grid-column field="email" title="email"> </kendo-grid-column>
+    <kendo-grid-column field="phoneNumber" title="phoneNumber"> </kendo-grid-column>
+    <kendo-grid-column field="machineType" title="machineType"> </kendo-grid-column>
+    <kendo-grid-column field="amount" title="amount"> </kendo-grid-column>
+    <button kendoButton>My Button</button>
+  </kendo-grid>
+</div>
 <div class="container1">
   <p *ngIf="home.length == 0" class="m-5">
     Order list is empty, please create a new order

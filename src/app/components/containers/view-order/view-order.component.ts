@@ -17,7 +17,11 @@ export class ViewOrderComponent implements OnInit {
 
   constructor(private serv: MainServiceService, private route: Router) {}
 
+
+
+
   ngOnInit(): void {
+    
     this.serv
       .getOrders()
       .subscribe(
@@ -27,7 +31,14 @@ export class ViewOrderComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user')!);
 
     if (this.user.username == 'admin') {
-      this.serv.getOrders().subscribe((res: any) => (this.home = res));
+      this.serv.getOrders().subscribe((res: any) => {
+        (this.home = res)
+        console.log(res);
+        
+        // for (const item of this.home) {
+          
+        // }
+      });
     }
   }
 
